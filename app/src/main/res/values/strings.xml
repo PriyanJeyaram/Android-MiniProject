@@ -2,4 +2,7 @@
     <string name="app_name">Smart Portal</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="midterm">Midterm</string>
+    <string name="revision">Revision</string>
+    <string name="terminal">Terminal</string>
 </resources>

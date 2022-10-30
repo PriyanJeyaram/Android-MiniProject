@@ -15,9 +15,15 @@
             android:icon="@drawable/ic_baseline_assessment_24"/>
 
         <item
+            android:id="@+id/nav_sports"
+            android:title="Sports"
+            android:icon="@drawable/ic_baseline_sports_basketball_24"/>
+
+        <item
             android:id="@+id/nav_awards"
             android:title="Awards"
             android:icon="@drawable/ic_baseline_auto_graph_24"/>
+
     </group>
 
     <group android:checkableBehavior="single">
