@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account"
+            android:title="My Account"
+            android:icon="@drawable/ic_baseline_account_circle_24"/>
+
+        <item
+            android:id="@+id/nav_marks"
+            android:title="Mark Details"
+            android:icon="@drawable/ic_baseline_assessment_24"/>
+
+        <item
+            android:id="@+id/nav_awards"
+            android:title="Awards"
+            android:icon="@drawable/ic_baseline_auto_graph_24"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Authenticate">
+            <menu>
+                <item
+                    android:title="Logout"
+                    android:icon="@drawable/ic_baseline_logout_24"
+                    android:id="@+id/nav_logout"
+                    />
+            </menu>
+        </item>
+    </group>
+
+</menu>
