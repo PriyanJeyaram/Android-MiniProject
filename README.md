@@ -1,0 +1,2 @@
+# Android-MiniProject
+Smart Portal
