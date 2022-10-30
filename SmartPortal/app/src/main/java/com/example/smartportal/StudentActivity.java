@@ -17,18 +17,33 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class StudentActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+    TextView name,admn,roll,std,sec,nat,bg,mother,phno,mail;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
+        name=findViewById(R.id.name);
+        admn=findViewById(R.id.admn);
+        roll=findViewById(R.id.roll);
+        std=findViewById(R.id.std);
+        sec=findViewById(R.id.sec);
+        nat=findViewById(R.id.nat);
+        bg=findViewById(R.id.blood);
+        mother=findViewById(R.id.mother);
+        phno=findViewById(R.id.ph);
+        mail=findViewById(R.id.mail);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
         // to make the Navigation drawer icon always appear on the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle Extras=getIntent().getExtras();
@@ -40,6 +55,17 @@ public class StudentActivity extends AppCompatActivity {
                      DocumentSnapshot doc=task.getResult();
                      if(doc.exists()){
                          Log.d("Document",doc.getData().toString());
+                         Map<String, Object> map=doc.getData();
+                         name.setText(map.get("name").toString());
+                         roll.setText(map.get("rollno").toString());
+                         admn.setText(map.get("admnNo").toString());
+                         std.setText(map.get("standard").toString());
+                         sec.setText(map.get("section").toString());
+                         nat.setText(map.get("native").toString());
+                         mother.setText(map.get("motherTongue").toString());
+                         bg.setText(map.get("bloodGroup").toString());
+                         phno.setText(map.get("phone").toString());
+                         mail.setText(map.get("username").toString());
                      }
                      else
                      {
