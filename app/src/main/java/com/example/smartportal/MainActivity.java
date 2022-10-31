@@ -1,6 +1,7 @@
 package com.example.smartportal;
 
-import static com.example.smartportal.R.id.editTextTextPersonName;
+
+import static com.example.smartportal.R.id.username_input;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,15 +18,15 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     EditText e1,e2;
-    Button b;
+    TextView b;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        e1=findViewById(editTextTextPersonName);
-        e2=findViewById(R.id.editTextTextPassword);
-        b=findViewById(R.id.button);
+        e1=findViewById(username_input);
+        e2=findViewById(R.id.pass);
+        b=findViewById(R.id.loginbutton);
         FirebaseAuth auth=FirebaseAuth.getInstance();
         b.setOnClickListener(v-> {
             String uname = e1.getText().toString();
