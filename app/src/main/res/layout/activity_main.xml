@@ -83,7 +83,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:maxLength="10"
+                android:maxLength="20"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"

@@ -1,5 +1,8 @@
 package com.example.smartportal;
 
+import static com.example.smartportal.R.id.marksrev;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,8 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Text;
-
 import java.util.Map;
 
 /**
@@ -26,8 +27,9 @@ import java.util.Map;
  * Use the {@link RevisionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@SuppressLint("MissingInflatedId")
 public class RevisionFragment extends Fragment {
-     String english;
+     StringBuilder rev=new StringBuilder();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,8 +76,9 @@ public class RevisionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        rev.setLength(0);
         View rootView= inflater.inflate(R.layout.fragment_revision, container, false);
-        TextView t1=rootView.findViewById(R.id.eng);
+        TextView t1=rootView.findViewById(R.id.marksrev);
         FirebaseFirestore.getInstance().collection("Student_marks_revision").document("mani_student@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -83,10 +86,14 @@ public class RevisionFragment extends Fragment {
                     DocumentSnapshot doc=task.getResult();
                     if(doc.exists()){
                         Log.d("Document",doc.getData().toString());
-                        Toast.makeText(getActivity().getApplicationContext(), doc.getData().toString(), Toast.LENGTH_SHORT).show();
                         Map<String,Object> map=doc.getData();
-                        english=map.get("english").toString();
-                        t1.setText(english);
+                        rev.append("ENGLISH : "+map.get("english").toString()+"\n");
+                        rev.append("LANGUAGE: "+map.get("language").toString()+"\n");
+                        rev.append("MATHS   : "+map.get("math").toString()+"\n");
+                        rev.append("SCIENCE : "+map.get("science").toString()+"\n");
+                        rev.append("SOCIAL  : "+map.get("socialScience").toString()+"\n");
+                        t1.setText(rev.toString());
+
 
                     }
                     else
