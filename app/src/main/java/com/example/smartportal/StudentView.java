@@ -3,12 +3,6 @@ package com.example.smartportal;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,6 +22,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -40,38 +39,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StudentView extends AppCompatActivity {
-    Map<String, Object> mapbio=new HashMap<>();
-    Map<String, Object> mapsports=new HashMap<>();
-    Map<String, Object> mapawards=new HashMap<>();
-    Map<String, Object> mapmarks1=new HashMap<>();
-    Map<String, Object> mapmarks2=new HashMap<>();
-    Map<String, Object> mapmarks3=new HashMap<>();
-    TextView t1,t2,t3,t4,t5,t6;
-    int total=0;
+    Map<String, Object> mapbio = new HashMap<>();
+    Map<String, Object> mapsports = new HashMap<>();
+    Map<String, Object> mapawards = new HashMap<>();
+    Map<String, Object> mapmarks1 = new HashMap<>();
+    Map<String, Object> mapmarks2 = new HashMap<>();
+    Map<String, Object> mapmarks3 = new HashMap<>();
+    TextView t1, t2, t3, t4, t5, t6;
+    int total = 0;
     int pageHeight = 1120;
     int pagewidth = 792;
-    Bitmap bmp, scaledbmp,bgmp;
+    Bitmap bmp, scaledbmp, bgmp;
     Uri uri;
-    String admn,roll,standard,section,sport,awards,sportawards,sportmedals,sportdesc,username;
+    String admn, roll, standard, section, sport, awards, sportawards, sportmedals, sportdesc, username;
     double percentile;
     private static final int PERMISSION_REQUEST_CODE = 200;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_view);
-        Bundle Extras= getIntent().getExtras();
-        String usrname=Extras.getString("usrname");
-        t1=findViewById(R.id.name1);
-        t2=findViewById(R.id.admn1);
-        t3=findViewById(R.id.rollno1);
-        t4=findViewById(R.id.std1);
-        t5=findViewById(R.id.ph1);
-        t6=findViewById(R.id.percent);
-        Button b=findViewById(R.id.button3);
-        bmp= BitmapFactory.decodeResource(getResources(),R.drawable.student);
-        scaledbmp=Bitmap.createScaledBitmap(bmp,140,140,false);
-        bgmp=BitmapFactory.decodeResource(getResources(),R.drawable.bg);
+        Bundle Extras = getIntent().getExtras();
+        String usrname = Extras.getString("usrname");
+        t1 = findViewById(R.id.name1);
+        t2 = findViewById(R.id.admn1);
+        t3 = findViewById(R.id.rollno1);
+        t4 = findViewById(R.id.std1);
+        t5 = findViewById(R.id.ph1);
+        t6 = findViewById(R.id.percent);
+        Button b = findViewById(R.id.button3);
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.student);
+        scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false);
+        bgmp = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
         if (checkPermission()) {
             Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
         } else {
@@ -81,26 +81,24 @@ public class StudentView extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("StudentBio").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc=task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document",doc.getData().toString());
-                        mapbio=doc.getData();
-                        admn=mapbio.get("admnNo").toString();
-                        roll=mapbio.get("rollno").toString();
-                        standard=mapbio.get("standard").toString();
-                        section=mapbio.get("section").toString();
-                        username=mapbio.get("username").toString();
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("Document", doc.getData().toString());
+                        mapbio = doc.getData();
+                        admn = mapbio.get("admnNo").toString();
+                        roll = mapbio.get("rollno").toString();
+                        standard = mapbio.get("standard").toString();
+                        section = mapbio.get("section").toString();
+                        username = mapbio.get("username").toString();
                         t1.setText(mapbio.get("name").toString());
                         t2.setText(mapbio.get("admnNo").toString());
                         t3.setText(mapbio.get("rollno").toString());
                         t4.setText(mapbio.get("standard").toString());
                         t5.setText(mapbio.get("phone").toString());
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-                        Log.d("Document","No data");
+                        Log.d("Document", "No data");
                     }
                 }
             }
@@ -108,20 +106,18 @@ public class StudentView extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Student_awards").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc=task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document",doc.getData().toString());
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("Document", doc.getData().toString());
 
-                        mapawards=doc.getData();
-                        awards= mapawards.get("description").toString();
+                        mapawards = doc.getData();
+                        awards = mapawards.get("description").toString();
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
 
-                        Log.d("Document","No data");
+                        Log.d("Document", "No data");
                     }
                 }
             }
@@ -129,22 +125,20 @@ public class StudentView extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Student_sports").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc=task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document",doc.getData().toString());
-                        mapsports=doc.getData();
-                        sport=mapsports.get("sports").toString();
-                        sportmedals=mapsports.get("medals").toString();
-                        sportawards=mapsports.get("awards").toString();
-                        sportdesc=mapsports.get("description").toString();
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("Document", doc.getData().toString());
+                        mapsports = doc.getData();
+                        sport = mapsports.get("sports").toString();
+                        sportmedals = mapsports.get("medals").toString();
+                        sportawards = mapsports.get("awards").toString();
+                        sportdesc = mapsports.get("description").toString();
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
 
-                        Log.d("Document","No data");
+                        Log.d("Document", "No data");
                     }
                 }
             }
@@ -152,25 +146,22 @@ public class StudentView extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Student_marks_midterm").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc=task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document",doc.getData().toString());
-                        mapmarks1=doc.getData();
-                        total+=Integer.parseInt(mapmarks1.get("english").toString());
-                        total+=Integer.parseInt(mapmarks1.get("language").toString());
-                        total+=Integer.parseInt(mapmarks1.get("math").toString());
-                        total+=Integer.parseInt(mapmarks1.get("science").toString());
-                        total+=Integer.parseInt(mapmarks1.get("socialScience").toString());
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("Document", doc.getData().toString());
+                        mapmarks1 = doc.getData();
+                        total += Integer.parseInt(mapmarks1.get("english").toString());
+                        total += Integer.parseInt(mapmarks1.get("language").toString());
+                        total += Integer.parseInt(mapmarks1.get("math").toString());
+                        total += Integer.parseInt(mapmarks1.get("science").toString());
+                        total += Integer.parseInt(mapmarks1.get("socialScience").toString());
 
 
-
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
 
-                        Log.d("Document","No data");
+                        Log.d("Document", "No data");
                     }
                 }
             }
@@ -178,23 +169,21 @@ public class StudentView extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Student_marks_revision").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc=task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document",doc.getData().toString());
-                        mapmarks2=doc.getData();
-                        total+=Integer.parseInt(mapmarks2.get("english").toString());
-                        total+=Integer.parseInt(mapmarks2.get("language").toString());
-                        total+=Integer.parseInt(mapmarks2.get("math").toString());
-                        total+=Integer.parseInt(mapmarks2.get("science").toString());
-                        total+=Integer.parseInt(mapmarks2.get("socialScience").toString());
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("Document", doc.getData().toString());
+                        mapmarks2 = doc.getData();
+                        total += Integer.parseInt(mapmarks2.get("english").toString());
+                        total += Integer.parseInt(mapmarks2.get("language").toString());
+                        total += Integer.parseInt(mapmarks2.get("math").toString());
+                        total += Integer.parseInt(mapmarks2.get("science").toString());
+                        total += Integer.parseInt(mapmarks2.get("socialScience").toString());
 
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-                        Log.d("Document","No data");
+                        Log.d("Document", "No data");
                     }
                 }
             }
@@ -202,34 +191,32 @@ public class StudentView extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("Student_marks_terminal").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc=task.getResult();
-                    if(doc.exists()){
-                        Log.d("Document",doc.getData().toString());
-                        mapmarks3=doc.getData();
-                        total+=Integer.parseInt(mapmarks3.get("english").toString());
-                        total+=Integer.parseInt(mapmarks3.get("language").toString());
-                        total+=Integer.parseInt(mapmarks3.get("math").toString());
-                        total+=Integer.parseInt(mapmarks3.get("science").toString());
-                        total+=Integer.parseInt(mapmarks3.get("socialScience").toString());
-                        percentile= (double) total/15.0;
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("Document", doc.getData().toString());
+                        mapmarks3 = doc.getData();
+                        total += Integer.parseInt(mapmarks3.get("english").toString());
+                        total += Integer.parseInt(mapmarks3.get("language").toString());
+                        total += Integer.parseInt(mapmarks3.get("math").toString());
+                        total += Integer.parseInt(mapmarks3.get("science").toString());
+                        total += Integer.parseInt(mapmarks3.get("socialScience").toString());
+                        percentile = (double) total / 15.0;
                         t6.setText(String.valueOf(percentile));
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-                        Log.d("Document","No data");
+                        Log.d("Document", "No data");
                     }
                 }
             }
         });
-        b.setOnClickListener(v->{
+
+        b.setOnClickListener(v -> {
             generatePDF();
         });
 
-
-
     }
+
     private void generatePDF() {
         // creating an object variable
         // for our PDF document.
@@ -240,7 +227,7 @@ public class StudentView extends AppCompatActivity {
         // for adding text in our PDF file.
         Paint paint = new Paint();
         Paint title = new Paint();
-        Paint bgpaint=new Paint();
+        Paint bgpaint = new Paint();
         // we are adding page info to our PDF file
         // in which we will be passing our pageWidth,
         // pageHeight and number of pages and after that
@@ -262,7 +249,7 @@ public class StudentView extends AppCompatActivity {
         // third parameter is position from top and last
         // one is our variable for paint.
         bgpaint.setStyle(Paint.Style.FILL);
-        bgpaint.setShader(new BitmapShader(bgmp, Shader.TileMode.REPEAT,Shader.TileMode.REPEAT));
+        bgpaint.setShader(new BitmapShader(bgmp, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT));
         canvas.drawPaint(bgpaint);
         canvas.drawBitmap(scaledbmp, 56, 40, paint);
 
@@ -295,16 +282,16 @@ public class StudentView extends AppCompatActivity {
         // below line is used for setting
         // our text to center of PDF.
         title.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("ADMISSION NO : "+admn, 50, 250, title);
-        canvas.drawText("ROLL N0 : "+roll, 50, 300, title);
-        canvas.drawText("STANDARD : "+standard, 50, 350, title);
-        canvas.drawText("SECTION : "+section, 50, 400, title);
-        canvas.drawText("STUDY PERCENTILE : "+percentile, 50, 450, title);
-        canvas.drawText("AWARDS : "+awards , 50, 500, title);
-        canvas.drawText("SPORTS : "+sport, 50, 550, title);
-        canvas.drawText("SPORT MEDALS : "+sportmedals, 50, 600, title);
-        canvas.drawText("SPORT AWARDS : "+sportawards, 50, 650, title);
-        canvas.drawText("SPORT FEATS : "+sportdesc, 50, 700, title);
+        canvas.drawText("ADMISSION NO : " + admn, 50, 250, title);
+        canvas.drawText("ROLL N0 : " + roll, 50, 300, title);
+        canvas.drawText("STANDARD : " + standard, 50, 350, title);
+        canvas.drawText("SECTION : " + section, 50, 400, title);
+        canvas.drawText("STUDY PERCENTILE : " + percentile, 50, 450, title);
+        canvas.drawText("AWARDS : " + awards, 50, 500, title);
+        canvas.drawText("SPORTS : " + sport, 50, 550, title);
+        canvas.drawText("SPORT MEDALS : " + sportmedals, 50, 600, title);
+        canvas.drawText("SPORT AWARDS : " + sportawards, 50, 650, title);
+        canvas.drawText("SPORT FEATS : " + sportdesc, 50, 700, title);
         // after adding all attributes to our
         // PDF file we will be finishing our page.
         pdfDocument.finishPage(myPage);
@@ -330,12 +317,13 @@ public class StudentView extends AppCompatActivity {
         Intent mShareIntent = new Intent();
         mShareIntent.setAction(Intent.ACTION_SEND);
         mShareIntent.setType("application/pdf");
-        mShareIntent.putExtra(Intent.EXTRA_EMAIL,username);
-        mShareIntent.putExtra(Intent.EXTRA_SUBJECT, "STUDENT REPORT FOR "+t1.getText().toString().toUpperCase());
+        mShareIntent.putExtra(Intent.EXTRA_EMAIL, username);
+        mShareIntent.putExtra(Intent.EXTRA_SUBJECT, "STUDENT REPORT FOR " + t1.getText().toString().toUpperCase());
         mShareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(mShareIntent);
 
     }
+
     private boolean checkPermission() {
         // checking of permissions.
         int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
