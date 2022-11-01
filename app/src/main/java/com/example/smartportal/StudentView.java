@@ -27,8 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -78,135 +76,113 @@ public class StudentView extends AppCompatActivity {
             requestPermission();
         }
 
-        FirebaseFirestore.getInstance().collection("StudentBio").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("Document", doc.getData().toString());
-                        mapbio = doc.getData();
-                        admn = mapbio.get("admnNo").toString();
-                        roll = mapbio.get("rollno").toString();
-                        standard = mapbio.get("standard").toString();
-                        section = mapbio.get("section").toString();
-                        username = mapbio.get("username").toString();
-                        t1.setText(mapbio.get("name").toString());
-                        t2.setText(mapbio.get("admnNo").toString());
-                        t3.setText(mapbio.get("rollno").toString());
-                        t4.setText(mapbio.get("standard").toString());
-                        t5.setText(mapbio.get("phone").toString());
-                    } else {
-                        Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-                        Log.d("Document", "No data");
-                    }
+        FirebaseFirestore.getInstance().collection("StudentBio").document(usrname).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    Log.d("Document", doc.getData().toString());
+                    mapbio = doc.getData();
+                    admn = mapbio.get("admnNo").toString();
+                    roll = mapbio.get("rollno").toString();
+                    standard = mapbio.get("standard").toString();
+                    section = mapbio.get("section").toString();
+                    username = mapbio.get("username").toString();
+                    t1.setText(mapbio.get("name").toString());
+                    t2.setText(mapbio.get("admnNo").toString());
+                    t3.setText(mapbio.get("rollno").toString());
+                    t4.setText(mapbio.get("standard").toString());
+                    t5.setText(mapbio.get("phone").toString());
+                } else {
+                    Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
+                    Log.d("Document", "No data");
                 }
             }
         });
-        FirebaseFirestore.getInstance().collection("Student_awards").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("Document", doc.getData().toString());
+        FirebaseFirestore.getInstance().collection("Student_marks_midterm").document(usrname).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    Log.d("Document", doc.getData().toString());
+                    mapmarks1 = doc.getData();
+                    total += Integer.parseInt(mapmarks1.get("english").toString());
+                    total += Integer.parseInt(mapmarks1.get("language").toString());
+                    total += Integer.parseInt(mapmarks1.get("math").toString());
+                    total += Integer.parseInt(mapmarks1.get("science").toString());
+                    total += Integer.parseInt(mapmarks1.get("socialScience").toString());
 
-                        mapawards = doc.getData();
-                        awards = mapawards.get("description").toString();
 
-                    } else {
-                        Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
 
-                        Log.d("Document", "No data");
-                    }
+                    Log.d("Document", "No data");
                 }
             }
         });
-        FirebaseFirestore.getInstance().collection("Student_sports").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("Document", doc.getData().toString());
-                        mapsports = doc.getData();
-                        sport = mapsports.get("sports").toString();
-                        sportmedals = mapsports.get("medals").toString();
-                        sportawards = mapsports.get("awards").toString();
-                        sportdesc = mapsports.get("description").toString();
+        FirebaseFirestore.getInstance().collection("Student_marks_revision").document(usrname).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    Log.d("Document", doc.getData().toString());
+                    mapmarks2 = doc.getData();
+                    total += Integer.parseInt(mapmarks2.get("english").toString());
+                    total += Integer.parseInt(mapmarks2.get("language").toString());
+                    total += Integer.parseInt(mapmarks2.get("math").toString());
+                    total += Integer.parseInt(mapmarks2.get("science").toString());
+                    total += Integer.parseInt(mapmarks2.get("socialScience").toString());
 
-                    } else {
-                        Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
 
-                        Log.d("Document", "No data");
-                    }
+                } else {
+                    Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
+                    Log.d("Document", "No data");
                 }
             }
         });
-        FirebaseFirestore.getInstance().collection("Student_marks_midterm").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("Document", doc.getData().toString());
-                        mapmarks1 = doc.getData();
-                        total += Integer.parseInt(mapmarks1.get("english").toString());
-                        total += Integer.parseInt(mapmarks1.get("language").toString());
-                        total += Integer.parseInt(mapmarks1.get("math").toString());
-                        total += Integer.parseInt(mapmarks1.get("science").toString());
-                        total += Integer.parseInt(mapmarks1.get("socialScience").toString());
-
-
-                    } else {
-                        Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-
-                        Log.d("Document", "No data");
-                    }
+        FirebaseFirestore.getInstance().collection("Student_marks_terminal").document(usrname).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    Log.d("Document", doc.getData().toString());
+                    mapmarks3 = doc.getData();
+                    total += Integer.parseInt(mapmarks3.get("english").toString());
+                    total += Integer.parseInt(mapmarks3.get("language").toString());
+                    total += Integer.parseInt(mapmarks3.get("math").toString());
+                    total += Integer.parseInt(mapmarks3.get("science").toString());
+                    total += Integer.parseInt(mapmarks3.get("socialScience").toString());
+                    percentile = (double) total / 15.0;
+                    t6.setText(String.valueOf(percentile));
+                } else {
+                    Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
+                    Log.d("Document", "No data");
                 }
             }
         });
-        FirebaseFirestore.getInstance().collection("Student_marks_revision").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("Document", doc.getData().toString());
-                        mapmarks2 = doc.getData();
-                        total += Integer.parseInt(mapmarks2.get("english").toString());
-                        total += Integer.parseInt(mapmarks2.get("language").toString());
-                        total += Integer.parseInt(mapmarks2.get("math").toString());
-                        total += Integer.parseInt(mapmarks2.get("science").toString());
-                        total += Integer.parseInt(mapmarks2.get("socialScience").toString());
-
-
-                    } else {
-                        Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-                        Log.d("Document", "No data");
-                    }
+        FirebaseFirestore.getInstance().collection("Student_sports").document(usrname).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    mapsports = doc.getData();
+                    sport = mapsports.get("sports").toString();
+                    sportmedals = mapsports.get("medals").toString();
+                    sportawards = mapsports.get("awards").toString();
+                    sportdesc = mapsports.get("description").toString();
+                } else {
+                    Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        FirebaseFirestore.getInstance().collection("Student_marks_terminal").document(usrname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("Document", doc.getData().toString());
-                        mapmarks3 = doc.getData();
-                        total += Integer.parseInt(mapmarks3.get("english").toString());
-                        total += Integer.parseInt(mapmarks3.get("language").toString());
-                        total += Integer.parseInt(mapmarks3.get("math").toString());
-                        total += Integer.parseInt(mapmarks3.get("science").toString());
-                        total += Integer.parseInt(mapmarks3.get("socialScience").toString());
-                        percentile = (double) total / 15.0;
-                        t6.setText(String.valueOf(percentile));
-                    } else {
-                        Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
-                        Log.d("Document", "No data");
-                    }
+        FirebaseFirestore.getInstance().collection("Student_awards").document(usrname).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot doc = task.getResult();
+                if (doc.exists()) {
+                    Log.d("Document", doc.getData().toString());
+
+                    mapawards = doc.getData();
+                    awards = mapawards.get("description").toString();
+
+                } else {
+                    Toast.makeText(StudentView.this, "No data", Toast.LENGTH_SHORT).show();
+
+                    Log.d("Document", "No data");
                 }
             }
         });
