@@ -1,20 +1,35 @@
 package com.example.smartportal;
 
+import static com.example.smartportal.R.id.marksrev;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RevisionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@SuppressLint("MissingInflatedId")
 public class RevisionFragment extends Fragment {
-
+     StringBuilder rev=new StringBuilder();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,6 +67,8 @@ public class RevisionFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+
         }
     }
 
@@ -59,6 +76,41 @@ public class RevisionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_revision, container, false);
+        rev.setLength(0);
+        View rootView= inflater.inflate(R.layout.fragment_revision, container, false);
+        TextView t1=rootView.findViewById(R.id.marksrev);
+        FirebaseFirestore.getInstance().collection("Student_marks_revision").document("mani_student@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot doc=task.getResult();
+                    if(doc.exists()){
+                        Log.d("Document",doc.getData().toString());
+                        Map<String,Object> map=doc.getData();
+                        rev.append("ENGLISH : "+map.get("english").toString()+"\n");
+                        rev.append("LANGUAGE: "+map.get("language").toString()+"\n");
+                        rev.append("MATHS   : "+map.get("math").toString()+"\n");
+                        rev.append("SCIENCE : "+map.get("science").toString()+"\n");
+                        rev.append("SOCIAL  : "+map.get("socialScience").toString()+"\n");
+                        t1.setText(rev.toString());
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(), "No data", Toast.LENGTH_SHORT).show();
+                        Log.d("Document","No data");
+                    }
+                }
+            }
+        });
+
+        return rootView;
+
+
     }
+
+
+
+
 }
