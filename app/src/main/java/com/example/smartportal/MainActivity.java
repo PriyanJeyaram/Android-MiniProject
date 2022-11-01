@@ -3,15 +3,14 @@ package com.example.smartportal;
 
 import static com.example.smartportal.R.id.username_input;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             Toast.makeText(this,"Student Login!",Toast.LENGTH_SHORT).show();
                             Intent i=new Intent(getApplicationContext(),StudentActivity.class);
-                            i.putExtra("usr",uname);
+                            i.putExtra("usr", uname);
                             startActivity(i);
                             finish();
                         }
