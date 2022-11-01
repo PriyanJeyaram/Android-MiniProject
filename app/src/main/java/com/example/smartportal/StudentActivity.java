@@ -24,11 +24,15 @@ public class StudentActivity extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle actionBarDrawerToggle;
     TextView name, admn, roll, std, sec, nat, bg, mother, phno, mail;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
+
+        Bundle Extras = getIntent().getExtras();
+        username = Extras.getString("usr");
 
         name = findViewById(R.id.name);
         admn = findViewById(R.id.admn);
@@ -56,11 +60,15 @@ public class StudentActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_marks:
                     Intent i = new Intent(getApplicationContext(),MarksActivity.class);
+                    i.putExtra("uName",username);
                     startActivity(i);
                     Toast.makeText(StudentActivity.this, "Marks Selected", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
                 case R.id.nav_sports:
+                    Intent i2 = new Intent(getApplicationContext(),SportsActivity.class);
+                    i2.putExtra("uName",username);
+                    startActivity(i2);
                     Toast.makeText(StudentActivity.this, "Sports Selected", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
@@ -77,8 +85,6 @@ public class StudentActivity extends AppCompatActivity {
         });
 
 //        Firebase Authentication
-        Bundle Extras = getIntent().getExtras();
-        String username = Extras.getString("usr");
         FirebaseFirestore.getInstance()
                 .collection("StudentBio")
                 .document(username)
