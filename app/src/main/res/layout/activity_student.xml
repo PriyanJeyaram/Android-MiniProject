@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
@@ -37,7 +37,7 @@
 
         <TextView
             android:id="@+id/admn"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="136dp"
@@ -45,6 +45,7 @@
             android:background="@drawable/custom_text2"
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="50dp"
+            android:gravity="center"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
             android:paddingBottom="10dp"
@@ -55,7 +56,7 @@
 
         <TextView
             android:id="@+id/blood"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="456dp"
@@ -63,6 +64,7 @@
             android:background="@drawable/custom_text2"
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="60dp"
+            android:gravity="center"
             android:paddingTop="10dp"
             android:paddingRight="60dp"
             android:paddingBottom="10dp"
@@ -73,11 +75,12 @@
 
         <TextView
             android:id="@+id/roll"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="196dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:background="@drawable/custom_text2"
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="60dp"
@@ -91,7 +94,7 @@
 
         <TextView
             android:id="@+id/nat"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="392dp"
@@ -99,6 +102,7 @@
             android:background="@drawable/custom_text2"
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="30dp"
+            android:gravity="center"
             android:paddingTop="10dp"
             android:paddingRight="30dp"
             android:paddingBottom="10dp"
@@ -109,11 +113,12 @@
 
         <TextView
             android:id="@+id/mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="652dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:background="@drawable/custom_text2"
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="0dp"
@@ -127,7 +132,7 @@
 
         <TextView
             android:id="@+id/ph"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="584dp"
@@ -140,12 +145,13 @@
             android:paddingBottom="10dp"
             android:textColor="#000000"
             android:textSize="20sp"
+            android:gravity="center"
             app:layout_constraintStart_toEndOf="@+id/textView13"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sec"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="328dp"
@@ -154,6 +160,8 @@
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="65dp"
             android:paddingTop="10dp"
+            android:gravity="center"
+
             android:paddingRight="65dp"
             android:paddingBottom="10dp"
             android:textColor="#000000"
@@ -163,7 +171,7 @@
 
         <TextView
             android:id="@+id/mother"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="524dp"
@@ -176,12 +184,13 @@
             android:paddingBottom="10dp"
             android:textColor="#000000"
             android:textSize="20sp"
+            android:gravity="center"
             app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/std"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="260dp"
@@ -190,6 +199,8 @@
             android:fontFamily="@font/poppins_medium"
             android:paddingLeft="65dp"
             android:paddingTop="10dp"
+            android:gravity="center"
+
             android:paddingRight="65dp"
             android:paddingBottom="10dp"
             android:textColor="#000000"
@@ -199,7 +210,7 @@
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="644dp"
             android:layout_marginEnd="224dp"
@@ -218,7 +229,7 @@
 
         <TextView
             android:id="@+id/textView13"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="584dp"
             android:layout_marginEnd="224dp"
@@ -235,7 +246,7 @@
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="524dp"
             android:layout_marginEnd="220dp"
@@ -253,7 +264,7 @@
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="392dp"
             android:layout_marginEnd="228dp"
@@ -272,7 +283,7 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="456dp"
             android:layout_marginEnd="224dp"
@@ -291,7 +302,7 @@
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="328dp"
             android:layout_marginEnd="228dp"
@@ -310,7 +321,7 @@
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="260dp"
             android:layout_marginEnd="228dp"
@@ -329,7 +340,7 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="196dp"
             android:layout_marginEnd="224dp"
@@ -362,7 +373,7 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="136dp"
             android:layout_marginEnd="228dp"
@@ -381,7 +392,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="72dp"
             android:layout_marginEnd="228dp"

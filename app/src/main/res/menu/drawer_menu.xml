@@ -23,6 +23,10 @@
             android:id="@+id/nav_awards"
             android:title="Awards"
             android:icon="@drawable/ic_baseline_auto_graph_24"/>
+        <item
+            android:id="@+id/nav_queries"
+            android:title="Submit Query"/>
+
 
     </group>
 

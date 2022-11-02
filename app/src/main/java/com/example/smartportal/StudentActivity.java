@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,9 +76,18 @@ public class StudentActivity extends AppCompatActivity {
                 case R.id.nav_awards:
                     Toast.makeText(StudentActivity.this, "Awards Selected", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
+                case R.id.nav_queries:
+                    Toast.makeText(this, "Queries Selected", Toast.LENGTH_SHORT).show();
+                    Intent i3=new Intent(getApplicationContext(),Queries.class);
+                    i3.putExtra("uName",username);
+                    startActivity(i3);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+
+
                     break;
                 case R.id.nav_logout:
-                    Toast.makeText(StudentActivity.this, "Logout Implementation", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentActivity.this, "Logging Out :)", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(StudentActivity.this, MainActivity.class));
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
             }

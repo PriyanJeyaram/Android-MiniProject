@@ -16,6 +16,20 @@
         android:theme="@style/Theme.SmartPortal"
         tools:targetApi="31">
         <activity
+            android:name=".StaffHomeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Queries"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SportsActivity"
             android:exported="false">
             <meta-data
