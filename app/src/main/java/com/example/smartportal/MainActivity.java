@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         if(temp[1].contains("staff"))
                         {
                             Toast.makeText(this, "Staff Login!", Toast.LENGTH_SHORT).show();
-                            Intent i=new Intent(getApplicationContext(),StaffActivity.class);
+                            Intent i=new Intent(getApplicationContext(),StaffHomeActivity.class);
                             startActivity(i);
                             finish();
                         }
