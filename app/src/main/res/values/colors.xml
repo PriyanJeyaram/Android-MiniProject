@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="golden">#FBF7D5</color>
     <color name="green">#C6F8E5</color>
+    <color name="bg_card_color">#423F5B</color>
+    <color name="bg_color">#040507</color>
+
 </resources>
