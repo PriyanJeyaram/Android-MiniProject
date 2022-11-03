@@ -75,7 +75,12 @@ public class StudentActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_awards:
                     Toast.makeText(StudentActivity.this, "Awards Selected", Toast.LENGTH_SHORT).show();
+                    Intent intt=new Intent(getApplicationContext(),Awards_Activity.class);
+                    intt.putExtra("usrname",username);
+                    startActivity(intt);
                     drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
                 case R.id.nav_queries:
                     Toast.makeText(this, "Queries Selected", Toast.LENGTH_SHORT).show();
                     Intent i3=new Intent(getApplicationContext(),Queries.class);

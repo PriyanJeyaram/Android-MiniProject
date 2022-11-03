@@ -18,7 +18,6 @@ public class StaffHomeActivity extends AppCompatActivity {
 //        Link to XML
         tv1 = findViewById(R.id.generateReport);
         tv2 = findViewById(R.id.viewStudents);
-
 //        Redirection Part
         tv1.setOnClickListener(view -> startActivity(new Intent(this, StaffActivity.class)));
 
