@@ -2,6 +2,7 @@ package com.example.smartportal;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.Animation;
@@ -45,7 +46,11 @@ public class ViewStudentsActivity extends AppCompatActivity {
                 StudentViewAdapter adapter = new StudentViewAdapter(ViewStudentsActivity.this, studentIds);
                 animation = AnimationUtils.loadAnimation(this, R.anim.animation1);
                 listView.setAdapter(adapter);
-                listView.setOnItemClickListener((adapterView, view, i, l) -> Toast.makeText(ViewStudentsActivity.this, studentIds.get(i), Toast.LENGTH_SHORT).show());
+                listView.setOnItemClickListener((adapterView, view, i, l) -> { Intent intt=new Intent(getApplicationContext(),StudentView.class);
+                intt.putExtra("usrname",studentIds.get(i));
+                startActivity(intt);}
+                );
+
 //                Toast.makeText(this, studentIds.toString(), Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "Error getting documents: ", task.getException());
