@@ -24,7 +24,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
     ListView listView;
     Animation animation;
     List<String> studentIds = new ArrayList<>();
-    Boolean enterFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,27 +35,21 @@ public class ViewStudentsActivity extends AppCompatActivity {
         listView = findViewById(R.id.listViewStudents);
         refresh = findViewById(R.id.imageButton);
 
-        refresh.setOnClickListener(view -> FirebaseFirestore.getInstance().collection("StudentBio").get().addOnCompleteListener(task -> {
+        refresh.setOnClickListener(v -> FirebaseFirestore.getInstance().collection("StudentBio").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 studentIds.clear();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     studentIds.add(document.getId());
                 }
                 Log.d("TAG", studentIds.toString());
-                enterFlag = true;
+                StudentViewAdapter adapter = new StudentViewAdapter(ViewStudentsActivity.this, studentIds);
+                animation = AnimationUtils.loadAnimation(this, R.anim.animation1);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener((adapterView, view, i, l) -> Toast.makeText(ViewStudentsActivity.this, studentIds.get(i), Toast.LENGTH_SHORT).show());
 //                Toast.makeText(this, studentIds.toString(), Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "Error getting documents: ", task.getException());
             }
         }));
-        Log.d("TAG", "Exited");
-
-        if(enterFlag){
-            Log.d("TAG", "ENTERED");
-            StudentViewAdapter adapter = new StudentViewAdapter(ViewStudentsActivity.this, studentIds);
-            animation = AnimationUtils.loadAnimation(this, R.anim.animation1);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener((adapterView, view, i, l) -> Toast.makeText(ViewStudentsActivity.this, studentIds.get(i), Toast.LENGTH_SHORT).show());
-        }
     }
 }
